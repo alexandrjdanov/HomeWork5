@@ -13,6 +13,17 @@ public class VoteApp {
     int[][] marks = new int[5][10];
     Scanner in = new Scanner(System.in);
 
+    int putMarks() {
+        int k;
+        while (true) {
+            k = in.nextInt();
+            if (!(k < 11 && k > 0))
+                System.out.println("Attention! Out of range 1-10. Please try again: ");
+            else break;
+        }
+        return k;
+    }
+
     void showIssuesAndVote() {
         System.out.println("Top 5 critical global issues:\n");
         for (int i = 0; i < issues.length; i++) System.out.println((i + 1) + ". " + issues[i]);
@@ -24,8 +35,7 @@ public class VoteApp {
             System.out.println("Let rate " + (issues[i]) + ": ");
             for (int j = 0; j < marks[i].length; j++) {
                 System.out.print((j + 1) + " person your turn: ");
-                int k = in.nextInt();
-                marks[i][j] = k;
+                marks[i][j] = putMarks();
             }
         }
         System.out.println();
@@ -45,7 +55,7 @@ public class VoteApp {
         }
     }
 
-    int getMinAndMax() {
+    void getMinAndMax() {
         int total = 0;
         max = 0;
         min = 101;
@@ -63,7 +73,5 @@ public class VoteApp {
         System.out.println();
         System.out.println("Minimum sum is " + min);
         System.out.println("Maximum sum is " + max);
-        return total;
+        }
     }
-}
-
