@@ -16,7 +16,8 @@ public class VoteApp {
     int putMarks() {
         int k;
         while (true) {
-            k = in.nextInt();
+            k = (int) ((Math.random()) * 10);
+            //k = in.nextInt();
             if (!(k < 11 && k > 0))
                 System.out.println("Attention! Out of range 1-10. Please try again: ");
             else break;
@@ -42,36 +43,61 @@ public class VoteApp {
     }
 
     void arrayAndAverage() {
+        System.out.println("Name of Issue\t\t\tU1\tU2\tU3\tU4\tU5\tU6\tU7\tU8\tU9\tU10\t\t№ of marks\t\tAVG\t\tSum");
+        int total = 0;
         for (int i = 0; i < marks.length; i++) {
+            total = 0;
             System.out.print(issues[i] + "\t\t");
             for (int j = 0; j < marks[i].length; j++) {
                 System.out.print(marks[i][j] + "\t");
                 avg = avg + marks[i][j];
+                total += marks[i][j];
             }
             avg = avg / marks[i].length;
-            System.out.print("Number of marks: " + marks[i].length + ";\t");
-            System.out.println("Average mark of this row is: " + avg);
+            System.out.print("\t\t" + marks[i].length + ";\t");
+            System.out.print("\t\t" + avg);
+            System.out.println("\t\t" + total);
             avg = 0;
         }
     }
+
+//    void getMinAndMax() {
+//        int total = 0;
+//        max = 0;
+//        min = 101;
+//
+//        int i;
+//        for (i = 0; i < marks.length; i++) {
+//            total = 0;
+//            for (int j = 0; j < marks[i].length; j++) {
+//                total = total + marks[i][j];
+//            }
+//            System.out.println("The sum of " + issues[i] + " marks is: " + total);
+//            if (total < min) min = total;
+//            if (total > max) max = total;
+//        }
+//        System.out.println();
+//        System.out.println("Minimum sum is " + min);
+//        System.out.println("Maximum sum is " + max);
+//        }
 
     void getMinAndMax() {
         int total = 0;
         max = 0;
         min = 101;
-
-        int i;
-        for (i = 0; i < marks.length; i++) {
+        int currentMinIssue = 0;
+        int currentMaxIssue = 0;
+        for (int i = 0; i < marks.length; i++) {
             total = 0;
             for (int j = 0; j < marks[i].length; j++) {
-                total = total + marks[i][j];
+                total += marks[i][j];
             }
-            System.out.println("The sum of " + issues[i] + " marks is: " + total);
-            if (total < min) min = total;
-            if (total > max) max = total;
+            if (total < min) {
+                min = total; currentMinIssue = i; }
+            if (total > max) {
+                max = total; currentMaxIssue = i; }
         }
-        System.out.println();
-        System.out.println("Minimum sum is " + min);
-        System.out.println("Maximum sum is " + max);
-        }
+        System.out.println("The least important is issue: " + issues[currentMinIssue] + " - with marks sum equal to " + min + ".");
+        System.out.println("The most important is issue: " + issues[currentMaxIssue] + " - with marks sum equal to " + max + ".");
     }
+}
